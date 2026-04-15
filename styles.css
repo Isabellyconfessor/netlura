@@ -1,0 +1,253 @@
+/* Ajusta o box model para todos os elementos e prepara o corpo para responsividade */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+/* Define o fundo preto, cor do texto branca, fonte sans-serif, remove margens e padding e evita overflow horizontal */
+body {
+    background: #000; /* Cor de fundo preta */
+    color: #fff; /* Cor do texto branca */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Família de fontes sans-serif */
+    margin: 0; /* Remove margem externa */
+    padding: 0; /* Remove padding interno */
+    min-height: 100vh; /* Altura mínima de toda a viewport */
+    position: relative; /* Permite posicionar o botao absoluto */
+    overflow-x: hidden; /* Evita scroll horizontal desnecessário */
+    display: flex; /* Usa flexbox para centrar o conteúdo */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+}
+
+/* Botao de alternacao de tema com visual de toggle/switch */
+#theme-toggle {
+    position: absolute; /* Posiciona no canto da tela */
+    top: 1rem; /* Distancia do topo */
+    right: 1rem; /* Distancia da direita */
+    width: 60px; /* Largura do switch */
+    height: 36px; /* Altura do switch */
+    background: rgba(255, 255, 255, 0.2); /* Fundo semitransparente */
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Borda semitransparente */
+    border-radius: 999px; /* Deixa totalmente arredondado */
+    cursor: pointer; /* Mostra que eh clicavel */
+    padding: 0; /* Remove padding padrao */
+    transition: background 0.3s ease, border-color 0.3s ease; /* Transicao suave */
+    z-index: 10; /* Garante que fique acima de outros elementos */
+}
+
+/* Circulo interno do switch */
+#theme-toggle::before {
+    content: ''; /* Cria o elemento */
+    position: absolute; /* Posicionamento absoluto dentro do botao */
+    width: 28px; /* Largura do circulo */
+    height: 28px; /* Altura do circulo */
+    background: #fff; /* Fundo branco */
+    border-radius: 50%; /* Deixa circular */
+    top: 2px; /* Espacamento do topo */
+    left: 2px; /* Espacamento da esquerda */
+    transition: left 0.3s ease; /* Transicao suave do movimento */
+}
+
+/* Estado do switch quando modo claro esta ativo */
+body.light-mode #theme-toggle {
+    background: rgba(0, 0, 0, 0.2); /* Fundo semitransparente escuro */
+    border-color: rgba(0, 0, 0, 0.3); /* Borda semitransparente escura */
+}
+
+body.light-mode #theme-toggle::before {
+    left: calc(100% - 30px); /* Move o circulo para o lado direito */
+}
+
+/* Centraliza o texto, define largura máxima e ocupa 100% da largura disponível */
+main {
+    text-align: center; /* Alinha o texto ao centro */
+    max-width: 950px; /* Largura máxima de 950px */
+    width: min(100%, 950px); /* Largura responsiva */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    padding: 2rem 1.5rem; /* Espaço interno para telas pequenas */
+    box-sizing: border-box; /* Inclui padding na largura total */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+/*Light mode*/
+body.light-mode {
+    background: #fff; /* Cor de fundo branca */
+    color: #222; /* Cor do texto preta */
+}
+
+.light-mode .profile {
+    color: #222; /* Cor do texto dos perfis preta no modo claro */
+}
+
+.light-mode img {
+    background: #eee; /*Fundo claro para imagens*/
+    border: 1px solid #ccc; /* Borda cinza clara para as imagens no modo claro */
+}
+
+.light-mode img:hover {
+    border: 1px solid #222; /* Borda preta no hover das imagens no modo claro */
+}
+
+
+
+/* Define o tamanho da fonte grande, margem inferior e peso da fonte normal */
+h1 {
+    font-size: clamp(2rem, 5vw, 3rem); /* Tamanho fluido para diferentes telas */
+    margin-bottom: 1.75rem; /* Margem inferior de 1.75rem */
+    font-weight: 400; /* Peso da fonte normal */
+}
+
+/* Usa flexbox para alinhar os perfis, centraliza, adiciona espaço entre itens e permite quebra de linha */
+.profiles {
+    display: flex; /* Usa flexbox */
+    justify-content: center; /* Centraliza os itens */
+    gap: 1.2rem; /* Espaço menor entre itens em telas maiores */
+    flex-wrap: wrap; /* Permite quebra de linha */
+}
+
+ul {
+    list-style: none; /* Remove marcadores de lista */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margem */
+    width: 100%;
+    max-width: 880px;
+    display: grid; /* Usa grade para blocos de perfis */
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem; /* Espaço de 1rem entre itens */
+}
+
+li {
+    width: 100%;
+}
+
+/* Remove decoração de texto, define cor branca, usa flexbox em coluna, centraliza itens e adiciona transição de transformação */
+.profile {
+    display: inline-block; /* Faz o link dimensionável com transform */
+    text-decoration: none; /* Remove sublinhado dos links */
+    color: #fff; /* Cor do texto branca */
+    transition: transform 0.3s ease; /* Transição suave para transformação */
+    transform-origin: center center; /* Escala a partir do centro */
+}
+
+/* Aumenta o tamanho do perfil no hover */
+.profile:hover {
+    transform: scale(1.2); /* Escala para 110% */
+}
+
+/* Define largura e altura da imagem, borda circular, ajusta o objeto, borda transparente e transição para cor da borda */
+.profile img {
+    width: 120px; /* Largura de 120px */
+    height: 120px; /* Altura de 120px */
+    border-radius: 50%; /* Borda circular */
+    object-fit: cover; /* Ajusta a imagem para cobrir sem distorcer */
+    border: 3px solid transparent; /* Borda transparente de 3px */
+    transition: border-color 0.3s ease; /* Transição suave para cor da borda */
+}
+
+/* Muda a cor da borda para branca no hover da imagem */
+.profile:hover img {
+    border-color: #fff; /* Cor da borda branca */
+}
+
+/* Define margem superior, tamanho da fonte e peso da fonte leve para a legenda */
+.profile figcaption {
+    margin-top: 1rem; /* Margem superior de 1rem */
+    font-size: 1.2rem; /* Tamanho da fonte de 1.2rem */
+    font-weight: 300; /* Peso da fonte leve */
+}
+
+/* Responsividade para tablets */
+@media (max-width: 1024px) {
+    main {
+        max-width: 800px; /* Reduz largura máxima para tablets */
+    }
+    
+    .profiles {
+        gap: 1rem; /* Reduz espaçamento entre perfis */
+    }
+
+    .profile img {
+        width: 130px; /* Ajusta largura da imagem */
+        height: 130px; /* Ajusta altura da imagem */
+    }
+
+    .profile figcaption {
+        font-size: 1.4rem; /* Ajusta tamanho da fonte da legenda */
+    }
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 900px) {
+    main {
+        max-width: 100%; /* Usa a largura completa */
+        padding: 1rem 1rem; /* Aumenta espaço lateral para ficar longe da borda */
+        gap: 0.9rem;
+    }
+
+    .profiles {
+        gap: 0.85rem; /* Reduz espaço entre perfis */
+        justify-content: center; /* Centraliza os itens */
+        width: 100%;
+    }
+
+    ul {
+        display: grid; /* Usa grade para dois perfis por linha */
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.65rem;
+        width: 100%;
+    }
+
+    .profile {
+        width: 100%;
+        margin-bottom: 0; /* Remove margem extra */
+    }
+
+    .profile img {
+        width: 110px; /* Ajusta largura da imagem */
+        height: 110px; /* Ajusta altura da imagem */
+    }
+
+    .profile figcaption {
+        font-size: 1.4rem; /* Ajusta tamanho da fonte da legenda */
+        margin-top: 0.4rem;
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        margin-top: 0.8rem; /* Ajusta espaçamento no topo */
+        padding: 1rem 1rem; /* Aumenta a distância da borda da tela */
+    }
+
+    h1 {
+        font-size: 1.6rem; /* Reduz tamanho da fonte do título */
+    }
+
+    ul {
+        display: grid; /* Mantém dois perfis por linha */
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem; /* Deixa os perfis mais próximos entre si */
+    }
+
+    .profile {
+        width: 100%;
+    }
+
+    .profile img {
+        width: 75px; /* Reduz a imagem para telas pequenas */
+        height: 75px; /* Reduz a imagem para telas pequenas */
+    }
+
+    .profile figcaption {
+        font-size: 0.95rem; /* Ajusta tamanho da legenda */
+        margin-top: 0.35rem;
+    }
+}
