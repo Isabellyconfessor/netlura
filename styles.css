@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* Define o fundo preto, cor do texto branca, fonte sans-serif, remove margens e padding, centraliza o conteúdo vertical e horizontalmente, ocupa toda a altura da viewport */
 body {
     background: #000; /* Cor de fundo preta */
@@ -199,7 +198,8 @@ ul{
     ul {
         gap: 1rem; /* Aumenta espaço entre itens para telas muito pequenas */  
     }
-=======
+}
+
 /* Ajusta o box model para todos os elementos e prepara o corpo para responsividade */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -452,5 +452,4 @@ li {
         font-size: 0.95rem; /* Ajusta tamanho da legenda */
         margin-top: 0.35rem;
     }
->>>>>>> master
 }
